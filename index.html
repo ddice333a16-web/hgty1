@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>موسيقاتي</title>
+<style>
+
+:root {
+    --bg-dark: #09090d;
+    --panel-dark: #12121a;
+    --gold: #d4af37;
+    --gold-hover: #fff3cd;
+    --text-light: #f5f5f7;
+    --text-muted: #a1a1a6;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-light);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+
+header {
+    background: var(--panel-dark);
+    padding: 15px 30px;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+header .logo {
+    max-width: 130px;
+    height: 40px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+header .store-title {
+    color: var(--text-light);
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+}
+
+
+.layout-container {
+    display: flex;
+    flex: 1;
+}
+
+
+.sidebar-nav {
+    width: 220px;
+    background: #050507;
+    padding: 30px 15px;
+    border-left: 1px solid rgba(212, 175, 55, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.sidebar-nav img {
+    width: 100%;
+    height: auto;
+    max-height: 45px;
+    object-fit: contain;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 6px;
+}
+
+.sidebar-nav img:hover {
+    transform: scale(1.05) translateX(-5px);
+    filter: brightness(1.2) drop-shadow(0 0 8px var(--gold));
+}
+
+
+.main-content {
+    flex: 1;
+    padding: 40px;
+    max-width: 1000px;
+}
+
+.page {
+    display: none;
+    animation: fadeIn 0.4s ease;
+}
+
+.page.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+.hero-section {
+    background: linear-gradient(135deg, #161622 0%, #0d0d11 100%);
+    padding: 45px 30px;
+    border-radius: 16px;
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    margin-bottom: 35px;
+    text-align: center;
+}
+
+.hero-section h2 {
+    color: var(--gold);
+    font-size: 28px;
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+.hero-section p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #e4e4e7;
+    margin: 0;
+}
+
+
+.premium-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    margin-bottom: 35px;
+}
+
+.premium-card {
+    background: var(--panel-dark);
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid #1f1f2e;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.premium-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--gold);
+}
+
+.premium-card img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    background-color: #161622;
+}
+
+.card-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.card-body h3 {
+    margin: 0 0 10px 0;
+    color: var(--text-light);
+    font-size: 18px;
+}
+
+.card-body p {
+    color: var(--text-muted);
+    font-size: 13px;
+    line-height: 1.6;
+    margin: 0 0 15px 0;
+    flex-grow: 1;
+}
+
+.price-tag {
+    font-size: 18px;
+    color: var(--gold);
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: #ff4d4d;
+    font-size: 13px;
+    margin-left: 8px;
+}
+
+.promo-video-section {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.promo-video-section h3 {
+    color: var(--gold);
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.video-wrapper {
+    max-width: 750px;
+    margin: 0 auto;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid rgba(212, 175, 55, 0.3);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+.promo-video {
+    width: 100%;
+    display: block;
+}
+
+
+.gold-btn {
+    background: linear-gradient(90deg, #d4af37, #aa820a);
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.gold-btn:hover {
+    background: linear-gradient(90deg, #fff3cd, #d4af37);
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.3);
+}
+
+.back-btn {
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 8px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    background: var(--gold);
+    color: #000;
+}
+
+.section-title {
+    color: var(--gold);
+    font-size: 22px;
+    margin-bottom: 20px;
+    border-right: 3px solid var(--gold);
+    padding-right: 10px;
+}
+
+footer {
+    background: #050507;
+    color: var(--text-muted);
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid #12121a;
+    font-size: 13px;
+
+    
+
+}
+.offers-btn{
+    max-height: 65px !important;
+    height: 65px !important;
+    transform: translateX(10px);
+    
+}
+
+.offers-btn:hover{
+    transform: scale(1.18) translateX(-5px);
+}
+
+
+
+@media (max-width: 768px) {
+    .layout-container {
+        flex-direction: column;
+    }
+    .sidebar-nav {
+        width: auto;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 15px;
+        gap: 10px;
+        border-left: none;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+    }
+    .sidebar-nav img {
+        max-width: 100px;
+        height: 35px;
+    }
+    .main-content {
+        padding: 20px;
+    }
+
+}
+
+@media (max-width: 768px) {
+    .offers-btn{
+        position: relative;
+        top: -20px;
+    }
+}
+
+</style>
+</head>
+<body>
+
+<header>
+    <img src="شعار متجر موسيقاتي.png" alt="شعار موسيقاتي" class="logo" onerror="this.onerror=null; this.src='Icoon.png';">
+    <p class="store-title">متجر موسيقاتي </p>
+</header>
+
+<div class="layout-container">
+    
+    <nav class="sidebar-nav">
+        <img src="زر الرئيسية.png" alt="الرئيسية" onclick="showPage('home')">
+        <img src="زر المتجر.png" alt="المتجر" onclick="showPage('storePage')">
+        <img src="زر الخدمات.png" alt="الخدمات" onclick="showPage('servicesPage')" onerror="this.onerror=null; this.src='زر الخدمات.PNG';"> 
+        <img src="زر العروض.png" alt="العروض الخاصة"
+            onclick="showPage('offersPage')"
+            onerror="this.onerror=null; this.src='زر العروض.PNG';"
+            class="offers-btn">
+        <img src="زر تواصل معنا.png" alt="تواصل معنا" onclick="showPage('contactPage')" onerror="this.onerror=null; this.src='زر تواصل معنا.PNG';">
+        <img src="زر الهدايا.png" alt="هدايا" onclick="showPage('giftsPage')" onerror="this.onerror=null; this.src='زر الهدايا.PNG';">
+        <img src="من نحن.png" alt="من نحن" onclick="showPage('aboutPage')" onerror="this.onerror=null; this.src='من نحن.PNG';">
+    </nav>
+
+    <main class="main-content">
+
+        <div id="home" class="page active">
+            <div class="hero-section">
+                <h2>مرحباً بكم في متجر موسيقاتي</h2>
+                <p>الوجهة الأولى لاستكشاف أرقى وأجود الآلات الموسيقية والملحقات الاحترافية في الأردن.</p>
+            </div>
+            <h3 class="section-title">ميزات موقع الويب الخاص بالمتجر</h3>
+            <p style="color: var(--text-muted); line-height: 1.8;">هذا الموقع يمثل واجهة موقع الويب الأولية, حيث تم تبسيط تجربة المستخدم وإلغاء العمليات المعقدة لضمان تجربة تصفح سريعة ومباشرة للمستخدمين.</p>
+        </div>
+
+        <div id="storePage" class="page">
+            <h3 class="section-title">أقسام المتجر الرئيسي</h3>
+            <div class="premium-grid">
+                <div class="premium-card">
+                    <img src="p1.png" alt="أجهزة البيانو" onerror="this.onerror=null; this.src='p1.PNG';">
+                    <div class="card-body">
+                        <h3>قسم البيانو الاحترافي</h3>
+                        <p>أجهزة بيانو ديجيتال وكلاسيكية متطورة من كبرى العلامات.</p>
+                        <button class="gold-btn" onclick="showPage('pianoPage')">استكشف القسم</button>
+                    </div>
+                </div>
+                <div class="premium-card">
+                    <img src="p7.png" alt="الاعواد الفاخرة" onerror="this.onerror=null; this.src='p7.PNG';">
+                    <div class="card-body">
+                        <h3>قسم الاعواد </h3>
+                        <p>تشكيلة من الاعواد المصنوعة يدويا بايدي كبار الحرفيين.</p>
+                        <button class="gold-btn" onclick="showPage('oudPage')">استكشف القسم</button>
+                    </div>
+                </div>
+                <div class="premium-card">
+                    <img src="p3.png" alt="الات النفخ" onerror="this.onerror=null; this.src='p9.PNG';">
+                    <div class="card-body">
+                        <h3>قسم الات البوق</h3>
+                        <p>ابواق من اجود الماركات العالمية تناسب المحترفين والمبتدئين.</p>
+                        <button class="gold-btn" onclick="showPage('trumpetPage')">استكشف القسم</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="promo-video-section">
+                <h3>العرض الترويجي لمتجر موسيقاتي</h3>
+                <div class="video-wrapper">
+                    <video autoplay muted loop controls class="promo-video">
+                        <source src="f.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="servicesPage" class="page">
+            <h3 class="section-title">الخدمات الفنية</h3>
+            <div class="premium-grid">
+                <div class="premium-card">
+                    <div class="card-body">
+                        <h3>صيانة الالات</h3>
+                        <p>نقدم خدمة الصيانة الدورية والدوزنة الاحترافية للاوتار والالات الالكترونية لتبقى بافضل اداء صوتي دائم.</p>
+                    </div>
+                </div>
+                <div class="premium-card">
+                    <div class="card-body">
+                        <h3>الاستشارات الفنية</h3>
+                        <p>استشارات فنية مختلفة بحسب ما تريده، الرجاء الذهاب لصفحة تواصل معنا لتفاصيل اكثر للتواصل معنا.</p>
+                        <button class="gold-btn" onclick="inquireProduct('الاستشارات الفنية')">طلب استشارة</button>
+                    </div>
+                </div>
+                <div class="premium-card">
+                    <div class="card-body">
+                        <h3>خدمة التوصيل</h3>
+                        <p>خدمة التوصيل هي من ابرز الخدمات التي يوفرها متجر موسيقاتي، حيث يقوم المتجر بتوفير خدمة التوصيل الى ثلاث اماكن في المملكة الاردنية الهاشمية، عبدون، المفرق، و مادبا.</p>
+                        <button class="gold-btn" onclick="inquireProduct('خدمة التوصيل')">استفسر عن التوصيل</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="offersPage" class="page">
+            <h3 class="section-title">الحصريات والتخفيضات الكبرى</h3>
+            <div class="premium-grid">
+                <div class="premium-card">
+                    <img src="offer1.png" alt="باقة البيانو" onerror="this.onerror=null; this.src='offer1.PNG';">
+                    <div class="card-body">
+                        <h3>باقة عازف البيانو المتكاملة</h3>
+                        <p>بيانو رقمي متطور + سماعات احترافية مع الكرسي المخصص ومحول الطاقة.</p>
+                        <span class="price-tag"><span class="old-price">560 د.أ</span> 499 د.أ</span>
+                        <button class="gold-btn" onclick="inquireProduct('باقة عازف البيانو المتكاملة')">استفسر عن الباقة</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="contactPage" class="page">
+            <h3 class="section-title">التواصل المباشر مع متجر موسيقاتي</h3>
+            <div class="hero-section" style="background: var(--panel-dark);">
+                <p style="margin-bottom: 20px;">يسعدنا استقبال استفساراتكم المباشرة لتأكيد الطلبات والشحن داخل الأردن:</p>
+                <a href="https://wa.me/962775856752" target="_blank" style="display:inline-block; background:#25D366; color:white; padding:12px 25px; text-decoration:none; border-radius:6px; font-weight:bold;">📞 راسلنا مباشرة عبر واتساب</a>
+            </div>
+        </div>
+
+
+        <div id="giftsPage" class="page">
+            <h3 class="section-title">اكسسوارات وهدايا</h3>
+            <div class="premium-grid">
+                <div class="premium-card">
+                    <img src="g1.png" alt="ميدالية نوتة" onerror="this.onerror=null; this.src='g1.PNG';">
+                    <div class="card-body">
+                        <h3>ميدالية على شكل نوتة موسيقية</h3>
+                        <p>قطع مميزة تعكس الهوية وتصلح للاهداء.</p>
+                        <span class="price-tag">10 د.أ</span>
+                        <button class="gold-btn" onclick="inquireProduct('ميدالية على شكل نوتة')">استفسر عن المنتج</button>
+                    </div>
+                </div>
+                <div class="premium-card">
+                    <img src="g2.png" alt="ميدالية ذهبية" onerror="this.onerror=null; this.src='g2.PNG';">
+                    <div class="card-body">
+                        <h3>ميدالية ذهبية</h3>
+                        <p>ميدالية ذهبية براقة وانيقة لآلتك الموسيقية المفضلة وبحجم متناسق.</p>
+                        <span class="price-tag">17 د.أ</span>
+                        <button class="gold-btn" onclick="inquireProduct('ميدالية ذهبية')">استفسر عن المنتج</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="aboutPage" class="page">
+            <h3 class="section-title">من نحن</h3>
+            <div class="hero-section" style="text-align: right;">
+                <p style="line-height: 1.9; margin-bottom: 20px;">يسعى مشروع "موسيقاتي" لتقديم واجهة متطورة تخدم الموسيقيين والعازفين بالأردن.</p>
+
+                <p style="font-size: 14px; color: var(--text-muted); margin: 5px 0;"> الطالب : ماجد الحامد</p>
+                <p style="font-size: 14px; color: var(--text-muted); margin: 5px 0;">  الأستاذ: إميل الطوال</p>
+            </div>
+        </div>
+
+
+        <div id="pianoPage" class="page">
+            <h3 class="section-title">معرض اجهزة البيانو</h3>
+            <div class="premium-grid">
+                <div class="premium-card">
+                    <img src="p1.png" alt="بيانو جراند" onerror="this.onerror=null; this.src='p1.PNG';">
+                    <div class="card-body">
+                        <h3>بيانو جراند كلاسيكي</h3>
+                        <p>صوت نقي ومفاتيح انسيابية ناعمة مثالية للعزف الاحترافي السلس.</p>
+                        <span class="price-tag">1600 د.أ</span>
+                        <button class="gold-btn" onclick="inquireProduct('بيانو جراند كلاسيكي')">استفسر عن الالة</button>
+                    </div>
+                </div>
+                <div class="premium-card">
+                    <img src="p2.png" alt="بيانو رقمي" onerror="this.onerror=null; this.src='p2.PNG';">
+                    <div class="card-body">
+                        <h3>بيانو جراند صغير</h3>
+                        <p>بيانو من نوع جراند صغير الحجم، بجودة صوتية ممتازة وسعر مناسب جدا للمساحات المنزلية.</p>
+                        <span class="price-tag">1150 د.أ</span>
+                        <button class="gold-btn" onclick="inquireProduct('بيانو جراند صغير')">استفسر عن الالة</button>
+                    </div>
+                </div>
+            </div>
+            <button class="back-btn" onclick="showPage('storePage')">العودة للاقسام</button>
+        </div>
+
+        <div id="oudPage" class="page">
+            <h3 class="section-title">معرض الاعواد الحرفية</h3>
+            <div class="premium-grid">
+                <div class="premium-card">
+                    <img src="p7.png" alt="عود كلاسيكي" onerror="this.onerror=null; this.src='p7.PNG';">
+                    <div class="card-body">
+                        <h3>عود كلاسيكي انيق</h3>
+                        <p>مصمم بعناية للمبتدئين والمحترفين ليعطي نبرة رنين شرقية دافئة.</p>
+                        <span class="price-tag">110 د.أ</span>
+                        <button class="gold-btn" onclick="inquireProduct('عود كلاسيكي انيق')">استفسر عن الالة</button>
+                    </div>
+                </div>
+                <div class="premium-card">
+                    <img src="p8.png" alt="عود تركي" onerror="this.onerror=null; this.src='p8.PNG';">
+                    <div class="card-body">
+                        <h3>عود بزخرفة حمراء</h3>
+                        <p>عود بخامة تصنيع ممتازة وزخرفة مميزة باللون الاحمر، وبسعر منافس ومناسب لجميع العازفين.</p>
+                        <span class="price-tag">120 د.أ</span>
+                        <button class="gold-btn" onclick="inquireProduct('عود بزخرفة حمراء')">استفسر عن الالة</button>
+                    </div>
+                </div>
+            </div>
+            <button class="back-btn" onclick="showPage('storePage')">العودة للاقسام</button>
+        </div>
+
+        <div id="trumpetPage" class="page">
+            <h3 class="section-title">معرض الات النفخ</h3>
+            <div class="premium-grid">
+                <div class="premium-card">
+                    <img src="piano6.png" alt="بوق كلاسيكي" onerror="this.onerror=null; this.src='p9.PNG';">
+                    <div class="card-body">
+                        <h3>بوق كلاسيكي </h3>
+                        <p>بوق نحاسي عالي الجودة مناسب للمحترفين يعطي صوتا حادا وواضحا في جميع الاجواء الموسيقية.</p>
+                        <span class="price-tag">220 د.أ</span>
+                        <button class="gold-btn" onclick="inquireProduct('بوق كلاسيكي نحاسي')">استفسر عن الالة</button>
+                    </div>
+                </div>
+                <div class="premium-card">
+                    <img src="p5.png" alt="فلوت فضي" onerror="this.onerror=null; this.src='p10.PNG';">
+                    <div class="card-body">
+                        <h3>بوق كلاسيكي بمعداته</h3>
+                        <p>بوق انيق بخامة قوية وصوت شديد النقاء، يساعد العازف على اظهار النغمات بوضوح تام.</p>
+                        <span class="price-tag">125 د.أ</span>
+                        <button class="gold-btn" onclick="inquireProduct('بوق كلاسيكي نقي')">استفسر عن الالة</button>
+                    </div>
+                </div>
+            </div>
+            <button class="back-btn" onclick="showPage('storePage')">العودة للاقسام</button>
+        </div>
+
+    </main>
+</div>
+
+<footer>
+    <p>موقع الويب الخاص بمتجر موسيقاتي           الطالب: ماجد الحامد   المقيم: إميل الطوال</p>
+</footer>
+
+<script>
+
+
+function showPage(pageId){
+    let pages = document.querySelectorAll('.page');
+    pages.forEach(function(page){
+        page.classList.remove('active');
+    });
+    let targetPage = document.getElementById(pageId);
+    if(targetPage) {
+        targetPage.classList.add('active');
+    }
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+function inquireProduct(productName) {
+    alert(`لقد اخترت الاستفسار عن: (${productName})\nيرجى التوجه لقسم "تواصل معنا" ومراسلتنا لتأكيد تفاصيل التوصيل والدفع في .`);
+}
+</script>
+</body>
+</html>
